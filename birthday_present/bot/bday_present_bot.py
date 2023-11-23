@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from telegram import ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
+from models import TelegramUser, Gift, Friend
+
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 HI_MESSAGE = 'Привет, {name}. Здесь краткое описание возможностей бота'
@@ -35,7 +37,6 @@ def wake_up(update, context):
 
 
 def main():
-    print('hi')
     updater = Updater(token=TOKEN)
 
     updater.dispatcher.add_handler(CommandHandler('start', wake_up))
