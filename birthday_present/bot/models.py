@@ -3,8 +3,9 @@ from django.db import models
 from django.utils import timezone
 
 
-class User(models.Model):
-    name = models.CharField(max_length=64)
+class TelegramUser(models.Model):
+    user_id = models.IntegerField(unique=True)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -20,7 +21,7 @@ class Friend(models.Model):
     birthday = models.DateField(validators=[validate_not_future_date])
     presents = models.ArrayField(models.CharField(max_length=100), null=True)
     user = models.ForeignKey(
-        User, related_name='friends', on_delete=models.CASCADE
+        TelegramUser, related_name='friends', on_delete=models.CASCADE
     )
 
     def __str__(self):
